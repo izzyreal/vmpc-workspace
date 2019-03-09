@@ -1,0 +1,9 @@
+editables:
+    moduru/0.1@izmar/testing:
+        path: moduru
+    ctoot/0.1@izmar/testing:
+        path: ctoot
+layout: layout_vs
+generators: cmake_multi
+workspace_generator: cmake
+root: ctoot/0.1@izmar/testing

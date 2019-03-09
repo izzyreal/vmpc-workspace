@@ -1,0 +1,15 @@
+[build_folder]
+build
+
+[source_folder]
+src
+
+#[moduru/0.1@izmar/testing:includedirs]
+#src/main
+
+[includedirs]
+src/main
+
+# This happens to be mostly useless (with CMake), as CMake is able to find them anyway
+[libdirs]
+build/{{settings.build_type}}
