@@ -3,7 +3,11 @@ editables:
         path: moduru
     ctoot/0.1@izmar/testing:
         path: ctoot
+    mpc/0.1@izmar/testing:
+        path: mpc
+    vmpc/0.1@izmar/testing:
+        path: vmpc
 layout: layout_vs
 generators: cmake_multi
 workspace_generator: cmake
-root: ctoot/0.1@izmar/testing
+root: vmpc/0.1@izmar/testing

@@ -7,10 +7,13 @@ def run(cmd):
         raise Exception("Command failed: %s" % cmd)
 
 def init_folders():
-    shutil.rmtree("ctoot/build", ignore_errors=True)
-    shutil.rmtree("moduru/build", ignore_errors=True)
-    shutil.rmtree("build", ignore_errors=True)
-    os.mkdir("build")
+    #shutil.rmtree("vmpc/build", ignore_errors=True)
+    #shutil.rmtree("mpc/build", ignore_errors=True)
+    #shutil.rmtree("ctoot/build", ignore_errors=True)
+    #shutil.rmtree("moduru/build", ignore_errors=True)
+    #shutil.rmtree("build", ignore_errors=True)
+    if !os.path.exists("moduru"):
+         os.mkdir("build")
 
 # Visual Studio
 init_folders()
@@ -24,6 +27,16 @@ if os.path.exists("ctoot"):
 	run("cd ctoot && git pull && cd")
 else:
 	run("git clone https://github.com/izzyreal/ctoot")
+
+if os.path.exists("mpc"):
+	run("cd mpc && git pull && cd")
+else:
+	run("git clone https://github.com/izzyreal/mpc")
+
+if os.path.exists("vmpc"):
+	run("cd vmpc && git pull && cd")
+else:
+	run("git clone https://github.com/izzyreal/vmpc")
 
 os.chdir("build")
 run("conan workspace install ../conanws_vs.yml")
