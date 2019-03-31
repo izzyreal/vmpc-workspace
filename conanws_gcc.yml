@@ -9,4 +9,4 @@ editables:
         path: vmpc
 layout: layout_gcc
 workspace_generator: cmake
-root: vmpc/0.1@izmar/testing
+root: vmpc/0.1@izmar/dev

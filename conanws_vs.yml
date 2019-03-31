@@ -10,4 +10,4 @@ editables:
 layout: layout_vs
 generators: cmake_multi
 workspace_generator: cmake
-root: vmpc/0.1@izmar/testing
+root: vmpc/0.1@izmar/dev
