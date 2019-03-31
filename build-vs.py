@@ -12,7 +12,7 @@ def init_folders():
     #shutil.rmtree("ctoot/build", ignore_errors=True)
     #shutil.rmtree("moduru/build", ignore_errors=True)
     #shutil.rmtree("build", ignore_errors=True)
-    if !os.path.exists("moduru"):
+    if not os.path.exists("moduru"):
          os.mkdir("build")
 
 # Visual Studio

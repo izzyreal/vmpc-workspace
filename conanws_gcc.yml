@@ -1,10 +1,12 @@
 editables:
-    say/0.1@user/testing:
-        path: say
-    hello/0.1@user/testing:
-        path: hello
-    chat/0.1@user/testing:
-        path: chat
+    moduru/0.1@izmar/dev:
+        path: moduru
+    ctoot/0.1@izmar/testing:
+        path: ctoot
+    mpc/0.1@izmar/testing:
+        path: mpc
+    vmpc/0.1@izmar/testing:
+        path: vmpc
 layout: layout_gcc
 workspace_generator: cmake
-root: chat/0.1@user/testing
+root: vmpc/0.1@izmar/testing

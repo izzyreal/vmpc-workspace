@@ -1,5 +1,5 @@
 editables:
-    moduru/0.1@izmar/testing:
+    moduru/0.1@izmar/dev:
         path: moduru
     ctoot/0.1@izmar/testing:
         path: ctoot
