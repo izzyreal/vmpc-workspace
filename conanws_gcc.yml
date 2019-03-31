@@ -1,11 +1,11 @@
 editables:
     moduru/0.1@izmar/dev:
         path: moduru
-    ctoot/0.1@izmar/testing:
+    ctoot/0.1@izmar/dev:
         path: ctoot
-    mpc/0.1@izmar/testing:
+    mpc/0.1@izmar/dev:
         path: mpc
-    vmpc/0.1@izmar/testing:
+    vmpc/0.1@izmar/dev:
         path: vmpc
 layout: layout_gcc
 workspace_generator: cmake
