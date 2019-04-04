@@ -66,7 +66,7 @@ Requirements:
 - [Python](https://www.python.org/downloads/)
 - [Conan](https://docs.conan.io/en/latest/installation.html)
 
-After cloning this repo, enter it and run `python build-win.py` or `python build-osx.py`. You will now have a Visual Studio solution or Xcode project in the `build` directory. Inside VS or Xcode you can choose to build debug or release.
+After cloning this repo, enter it and run `python build.py --ide VS` or `python build.py --ide Xcode`. You will now have a Visual Studio solution or Xcode project in the `build` directory. Inside VS or Xcode you can choose to build debug or release.
 
 There are 4 main targets, and 1 test suite target for each of them. Note that the test suite targets are completely different from Conan's `test_package` directories. The latter are concerned with verifying the health of a Conan package, and verifying inclusion of headers and linked libraries. The test suites of the main targets are for unit and integration testing.
 
