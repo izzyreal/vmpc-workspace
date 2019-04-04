@@ -4,9 +4,6 @@ build
 [source_folder]
 src
 
-#[moduru/0.1@izmar/testing:includedirs]
-#src/main
-
 [includedirs]
 src/main
 

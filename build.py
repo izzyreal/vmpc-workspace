@@ -1,5 +1,12 @@
 import os
 import shutil
+import argparse
+
+parser = argparse.ArgumentParser(description='Build the vmpc2000xl workspace.')
+parser.add_argument('--ide', metavar='<name>', required=True, help='The IDE you want to build the workspace for. Options are VS and Xcode')
+
+args = parser.parse_args()
+print args
 
 def run(cmd):
     ret = os.system(cmd)
@@ -12,10 +19,13 @@ def init_folders():
     #shutil.rmtree("ctoot/build", ignore_errors=True)
     #shutil.rmtree("moduru/build", ignore_errors=True)
     #shutil.rmtree("build", ignore_errors=True)
-    if not os.path.exists("moduru"):
+    if not os.path.exists("build"):
          os.mkdir("build")
 
-# Visual Studio
+if args.ide != 'VS' and args.ide != 'Xcode':
+    print 'ide has to be VS or Xcode'
+    quit()
+
 init_folders()
 
 if os.path.exists("moduru"):
@@ -39,11 +49,19 @@ else:
 	run("git clone https://github.com/izzyreal/vmpc")
 
 os.chdir("build")
-run("conan workspace install ../conanws_vs.yml")
-run("conan workspace install ../conanws_vs.yml -s build_type=Debug")
-run('cmake .. -G "Visual Studio 15 Win64"')
+run("conan workspace install ../conanws.yml --build missing")
+run("conan workspace install ../conanws.yml -s build_type=Debug --build missing")
+
+if ide == 'VS':
+    run('cmake .. -G "Visual Studio 15 Win64"')
+elif ide == 'Xcode':
+	run('cmake .. -G "Xcode"')
+
+# Uncomment the below to build an executable
 #run('cmake --build . --config Release')
 #run('cmake --build . --config Debug')
+
+# Uncommend the below to run the executables
 #os.chdir("..")
 #run('cd moduru/build/Release && test')
 #run('cd moduru/build/Debug && test')

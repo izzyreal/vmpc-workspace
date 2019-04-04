@@ -22,9 +22,15 @@ If you simply want to use VMPC2000XL and need the installer, see [http://www.izm
 
 # Packages
 
+Starting around March 2019 I became strongly interested in C++ package management. VMPC2000XL had been using [JUCE](https://juce.com/) for a while, but I disliked how it demands to sit at the top of one's dependency chain. JUCE comes with the [Projucer](https://juce.com/discover/stories/projucer-manual), an application that is required to produce workspaces for your IDE. I find that cumbersome -- I see more merit in e.g. [Cmake](https://cmake.org/). I want to use the tooling I prefer when consuming a dependency. Additionally, the Projucer wouldn't let me create additional targets within the same workspace, so editing code of both the JUCE project as well as of my own libraries wasn't effortless.
+
+JUCE does many amazing things, but I really wanted to learn more about generic C++ and build tooling, and C++ package management.
+
+I ended up using Conan to orchestrate workspaces, builds and packages. I started by wrapping the smallest of my libraries, `moduru`, into a Conan package. Then `ctoot`, `mpc`, `vmpc` and finally this repository's project --`vmpc-workspace`.
+
 #### vmpc
 
-`vmpc` is a runnable GUI implementation of `mpc`. The root of the workspace, it's where the main application's executable lives. `vmpc` depends on `mpc`, `ctoot` and `moduru` (and many 3rd party libraries).
+`vmpc` is a runnable GUI implementation of `mpc`. The root of the workspace (and thus of the dependency tree), it's where the main application's executable lives. `vmpc` depends on `mpc`, `ctoot` and `moduru` (and many 3rd party libraries).
 
 #### mpc
 
