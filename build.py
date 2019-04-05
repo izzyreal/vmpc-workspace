@@ -1,12 +1,18 @@
 import os
 import shutil
 import argparse
+import sys
 
-parser = argparse.ArgumentParser(description='Build the vmpc2000xl workspace.')
-parser.add_argument('--ide', metavar='<name>', required=True, help='The IDE you want to build the workspace for. Options are VS and Xcode')
+class MyParser(argparse.ArgumentParser):
+    def error(self, message):
+        sys.stderr.write('error: %s\n' % message)
+        self.print_help()
+        sys.exit(2)
+
+parser = MyParser(description='Build the vmpc2000xl workspace.')
+parser.add_argument('ide', help='The IDE you want to build the workspace for. Options are vs and xcode')
 
 args = parser.parse_args()
-print args
 
 def run(cmd):
     ret = os.system(cmd)
@@ -22,8 +28,8 @@ def init_folders():
     if not os.path.exists("build"):
          os.mkdir("build")
 
-if args.ide != 'VS' and args.ide != 'Xcode':
-    print 'ide has to be VS or Xcode'
+if args.ide != 'vs' and args.ide != 'xcode':
+    print 'ide has to be vs or xcode'
     quit()
 
 init_folders()
@@ -52,9 +58,9 @@ os.chdir("build")
 run("conan workspace install ../conanws.yml --build missing")
 run("conan workspace install ../conanws.yml -s build_type=Debug --build missing")
 
-if ide == 'VS':
+if args.ide == 'vs':
     run('cmake .. -G "Visual Studio 15 Win64"')
-elif ide == 'Xcode':
+elif args.ide == 'xcode':
 	run('cmake .. -G "Xcode"')
 
 # Uncomment the below to build an executable
