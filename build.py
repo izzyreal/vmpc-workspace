@@ -29,7 +29,7 @@ def init_folders():
          os.mkdir("build")
 
 if args.ide != 'vs' and args.ide != 'xcode':
-    print 'ide has to be vs or xcode'
+    print('ide has to be vs or xcode')
     quit()
 
 init_folders()
