@@ -69,7 +69,7 @@ The library is agnostic to GUI implementation, and depends on `ctoot` and `modur
 
 
 
-# Development Setup (Visual Studio & Xcode)
+# Development Setup (Visual Studio 2017 & Xcode)
 
 Requirements:
 
