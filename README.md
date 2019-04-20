@@ -73,6 +73,7 @@ The library is agnostic to GUI implementation, and depends on `ctoot` and `modur
 
 Requirements:
 
+- [CMake](https://cmake.org/)
 - [Python](https://www.python.org/downloads/)
 - [Conan](https://docs.conan.io/en/latest/installation.html)
 
