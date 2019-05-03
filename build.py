@@ -20,11 +20,11 @@ def run(cmd):
         raise Exception("Command failed: %s" % cmd)
 
 def init_folders():
-    #shutil.rmtree("vmpc/build", ignore_errors=True)
-    #shutil.rmtree("mpc/build", ignore_errors=True)
-    #shutil.rmtree("ctoot/build", ignore_errors=True)
-    #shutil.rmtree("moduru/build", ignore_errors=True)
-    #shutil.rmtree("build", ignore_errors=True)
+    shutil.rmtree("vmpc/build", ignore_errors=True)
+    shutil.rmtree("mpc/build", ignore_errors=True)
+    shutil.rmtree("ctoot/build", ignore_errors=True)
+    shutil.rmtree("moduru/build", ignore_errors=True)
+    shutil.rmtree("build", ignore_errors=True)
     if not os.path.exists("build"):
          os.mkdir("build")
 
@@ -38,7 +38,7 @@ if os.path.exists("moduru"):
 	run("cd moduru && git pull && cd")
 else:
 	run("git clone https://github.com/izzyreal/moduru")
-	
+
 if os.path.exists("ctoot"):
 	run("cd ctoot && git pull && cd")
 else:
