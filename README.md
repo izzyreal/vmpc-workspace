@@ -77,7 +77,11 @@ Requirements:
 - [Python](https://www.python.org/downloads/)
 - [Conan](https://docs.conan.io/en/latest/installation.html)
 
-First add the [Bincrafters Conan repository](https://bintray.com/bincrafters/public-conan) to your remotes.
+First add the following remotes to Conan:
+* [Bincrafters](https://bintray.com/bincrafters/public-conan)
+* [qno](https://bintray.com/qno/conan-public)
+
+If you follow the repository links to bintray.com, you will see a `SET ME UP!` button in the top right that will give you the exact command to add the remote to Conan.
 
 Then clone this repo, enter its directory and run `python build.py vs` or `python build.py xcode`. You will now have a Visual Studio solution or Xcode project in the `build` directory. Inside VS or Xcode you can choose to build debug or release.
 
