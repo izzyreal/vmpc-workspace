@@ -10,9 +10,13 @@ class MyParser(argparse.ArgumentParser):
         sys.exit(2)
 
 parser = MyParser(description='Build the vmpc2000xl workspace.')
-parser.add_argument('ide', help='The IDE you want to build the workspace for. Options are vs and xcode')
+parser.add_argument('ide', help='The IDE you want to build the workspace for. Options are vs and xcode.')
+parser.add_argument('-o', '--offline', action='store_true', help='Offline mode. No git clone or pull and no Conan package fetching.')
 
 args = parser.parse_args()
+
+if args.offline == True:
+	sys.stderr.write('Entering offline mode...\n')
 
 def run(cmd):
     ret = os.system(cmd)
@@ -34,25 +38,26 @@ if args.ide != 'vs' and args.ide != 'xcode':
 
 init_folders()
 
-if os.path.exists("moduru"):
-	run("cd moduru && git pull && cd")
-else:
-	run("git clone https://github.com/izzyreal/moduru")
+if args.offline == False:
+	if os.path.exists("moduru"):
+		run("cd moduru && git pull && cd")
+	else:
+		run("git clone https://github.com/izzyreal/moduru")
 
-if os.path.exists("ctoot"):
-	run("cd ctoot && git pull && cd")
-else:
-	run("git clone https://github.com/izzyreal/ctoot")
+	if os.path.exists("ctoot"):
+		run("cd ctoot && git pull && cd")
+	else:
+		run("git clone https://github.com/izzyreal/ctoot")
 
-if os.path.exists("mpc"):
-	run("cd mpc && git pull && cd")
-else:
-	run("git clone https://github.com/izzyreal/mpc")
+	if os.path.exists("mpc"):
+		run("cd mpc && git pull && cd")
+	else:
+		run("git clone https://github.com/izzyreal/mpc")
 
-if os.path.exists("vmpc"):
-	run("cd vmpc && git pull && cd")
-else:
-	run("git clone https://github.com/izzyreal/vmpc")
+	if os.path.exists("vmpc"):
+		run("cd vmpc && git pull && cd")
+	else:
+		run("git clone https://github.com/izzyreal/vmpc")
 
 os.chdir("build")
 run("conan workspace install ../conanws.yml --build missing")
