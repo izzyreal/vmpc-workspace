@@ -24,7 +24,7 @@ def run(cmd):
         raise Exception("Command failed: %s" % cmd)
 
 def init_folders():
-    shutil.rmtree("vmpc/build", ignore_errors=True)
+    shutil.rmtree("vmpc-juce/build", ignore_errors=True)
     shutil.rmtree("mpc/build", ignore_errors=True)
     shutil.rmtree("ctoot/build", ignore_errors=True)
     shutil.rmtree("moduru/build", ignore_errors=True)
@@ -36,7 +36,7 @@ if args.ide != 'vs' and args.ide != 'xcode':
     print('ide has to be vs or xcode')
     quit()
 
-init_folders()
+#init_folders()
 
 if args.offline == False:
 	if os.path.exists("moduru"):
@@ -54,17 +54,17 @@ if args.offline == False:
 	else:
 		run("git clone https://github.com/izzyreal/mpc")
 
-	if os.path.exists("vmpc"):
-		run("cd vmpc && git pull && cd")
+	if os.path.exists("vmpc-juce"):
+		run("cd vmpc-juce && git pull && cd")
 	else:
-		run("git clone https://github.com/izzyreal/vmpc")
+		run("git clone https://github.com/izzyreal/vmpc-juce")
 
 os.chdir("build")
 run("conan workspace install ../conanws.yml --build missing")
 run("conan workspace install ../conanws.yml -s build_type=Debug --build missing")
 
 if args.ide == 'vs':
-    run('cmake .. -G "Visual Studio 15 Win64"')
+    run('cmake .. -G "Visual Studio 16 2019"')
 elif args.ide == 'xcode':
 	run('cmake .. -G "Xcode"')
 
