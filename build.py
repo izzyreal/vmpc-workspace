@@ -36,7 +36,7 @@ if args.ide != 'vs' and args.ide != 'xcode':
     print('ide has to be vs or xcode')
     quit()
 
-#init_folders()
+init_folders()
 
 if args.offline == False:
 	if os.path.exists("moduru"):
