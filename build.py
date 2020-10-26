@@ -12,6 +12,7 @@ class MyParser(argparse.ArgumentParser):
 parser = MyParser(description='Build the vmpc2000xl workspace.')
 parser.add_argument('ide', help='The IDE you want to build the workspace for. Options are vs and xcode.')
 parser.add_argument('-o', '--offline', action='store_true', help='Offline mode. No git clone or pull and no Conan package fetching.')
+parser.add_argument('-c', '--clean', action='store_true', help='Clean all build dirs before building.')
 
 args = parser.parse_args()
 
@@ -23,20 +24,22 @@ def run(cmd):
     if ret != 0:
         raise Exception("Command failed: %s" % cmd)
 
-def init_folders():
+def clean_folders():
     shutil.rmtree("vmpc-juce/build", ignore_errors=True)
     shutil.rmtree("mpc/build", ignore_errors=True)
     shutil.rmtree("ctoot/build", ignore_errors=True)
     shutil.rmtree("moduru/build", ignore_errors=True)
     shutil.rmtree("build", ignore_errors=True)
-    if not os.path.exists("build"):
-         os.mkdir("build")
 
 if args.ide != 'vs' and args.ide != 'xcode':
     print('ide has to be vs or xcode')
     quit()
 
-init_folders()
+if args.clean == True:
+    clean_folders()
+
+if not os.path.exists("build"):
+    os.mkdir("build")
 
 if args.offline == False:
 	if os.path.exists("moduru"):
