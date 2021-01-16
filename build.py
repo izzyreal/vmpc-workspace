@@ -10,7 +10,7 @@ class MyParser(argparse.ArgumentParser):
         sys.exit(2)
 
 parser = MyParser(description='Build the vmpc2000xl workspace.')
-parser.add_argument('ide', help='The IDE you want to build the workspace for. Options are vs and xcode.')
+parser.add_argument('ide', help='The IDE or build tool you want to build the workspace for. Options are vs, xcode, ninja and make.')
 parser.add_argument('-o', '--offline', action='store_true', help='Offline mode. No git clone or pull and no Conan package fetching.')
 parser.add_argument('-c', '--clean', action='store_true', help='Clean all build dirs before building.')
 
@@ -31,8 +31,8 @@ def clean_folders():
     shutil.rmtree("moduru/build", ignore_errors=True)
     shutil.rmtree("build", ignore_errors=True)
 
-if args.ide != 'vs' and args.ide != 'xcode':
-    print('ide has to be vs or xcode')
+if args.ide != 'vs' and args.ide != 'xcode' and args.ide != 'make' and args.ide != 'ninja':
+    print('ide has to be vs, xcode, ninja or make')
     quit()
 
 if args.clean == True:
@@ -69,10 +69,14 @@ run("conan workspace install ../conanws.yml -s build_type=Debug --build missing"
 if args.ide == 'vs':
     run('cmake .. -G "Visual Studio 16 2019"')
 elif args.ide == 'xcode':
-	run('cmake .. -G "Xcode"')
+    run('cmake .. -G "Xcode"')
+elif args.ide == 'make':
+    run('cmake .. -G "Unix Makefiles"')
+elif args.ide == 'ninja':
+    run('cmake .. -G "Ninja Multi-Config"')
 
 # Uncomment the below to build an executable
-#run('cmake --build . --config Release')
+run('cmake --build . --config Release')
 #run('cmake --build . --config Debug')
 
 # Uncommend the below to run the executables
