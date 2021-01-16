@@ -76,7 +76,7 @@ elif args.ide == 'ninja':
     run('cmake .. -G "Ninja Multi-Config"')
 
 # Uncomment the below to build an executable
-run('cmake --build . --config Release')
+run('cmake --build . --config Release --target vmpc2000xl_Standalone')
 #run('cmake --build . --config Debug')
 
 # Uncommend the below to run the executables
