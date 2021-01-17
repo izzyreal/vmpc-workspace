@@ -74,8 +74,8 @@ elif args.buildtool == 'ninja':
     run('cmake .. -G "Ninja Multi-Config"')
 
 # Uncomment the below to build an executable
-run('cmake --build . --config Release --target vmpc2000xl_Standalone')
-#run('cmake --build . --config Debug')
+#run('cmake --build . --config Release --target vmpc2000xl_Standalone')
+#run('cmake --build . --config Debug --target vmpc2000xl_Standalone')
 
 # Uncommend the below to run the executables
 #os.chdir("..")
