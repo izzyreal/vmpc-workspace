@@ -63,8 +63,12 @@ if args.offline == False:
 		run("git clone https://github.com/izzyreal/vmpc-juce")
 
 os.chdir("build")
-run("conan workspace install ../conanws.yml -s arch_build=x86 --build missing")
-run("conan workspace install ../conanws.yml -s arch_build=x86 -s build_type=Debug --build missing")
+if args.buildtool == 'vs32':
+	run("conan workspace install ../conanws.yml -s arch_build=x86 --build missing")
+	run("conan workspace install ../conanws.yml -s arch_build=x86 -s build_type=Debug --build missing")
+else:
+	run("conan workspace install ../conanws.yml --build missing")
+	run("conan workspace install ../conanws.yml --build missing -s build_type=Debug")
 
 if args.buildtool == 'vs':
     run('cmake .. -G "Visual Studio 16 2019"')
