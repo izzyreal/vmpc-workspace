@@ -60,7 +60,7 @@ if args.offline == False:
 	if os.path.exists("vmpc-juce"):
 		run("cd vmpc-juce && git pull && cd")
 	else:
-		run("git clone https://github.com/izzyreal/vmpc-juce")
+		run("git clone --single-branch --branch lv2 https://github.com/izzyreal/vmpc-juce")
 
 os.chdir("build")
 if args.buildtool == 'vs32':
