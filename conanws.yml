@@ -8,6 +8,6 @@ editables:
     vmpc-juce/0.1@izmar/dev:
         path: vmpc-juce
 layout: layout
-generators: cmake_multi
+generators: cmake
 workspace_generator: cmake
 root: vmpc-juce/0.1@izmar/dev
