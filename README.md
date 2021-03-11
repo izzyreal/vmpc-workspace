@@ -22,16 +22,22 @@ conan remote add bintray-izmar https://api.bintray.com/conan/izmar/izmar-conan-d
 git clone https://github.com/izzyreal/vmpc-workspace
 cd vmpc-workspace
 ```
-If you want to use Visual Studio, run
+If you want to use Visual Studio and build 64 bit binaries, run
 ```
-python build.py vs 
+python build.py vs
+```
+or for a 32 bit
+```
+python build.py vs32
 ```
 and for Xcode
 ```
 python build.py xcode
 ```
 
-Open the VS solution or Xcode project in `vmpc-workspace/build` and you're good to go. There are Release and Debug configs. Both IDEs will default to the Debug config.
+There are some more generators available. Run `python build.py` to see them all. The ninja and make generators are used by after executing `build.py` going into the `vmpc-workspace/build` dir and running `make help` or `ninja help` to see the available targets.
+
+For Xcode and VS, open the solution or project in `vmpc-workspace/build` and you're good to go. There are Release and Debug configs. Both IDEs will default to the Debug config.
 
 
 # Overview
