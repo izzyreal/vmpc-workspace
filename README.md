@@ -11,14 +11,14 @@ You are interested in
 # Quick start
 
 Requirements:
-- Visual Studio 2019 or Xcode
+- Visual Studio 2019, Xcode or Make
 - [CMake](https://cmake.org/)
 - [Python](https://www.python.org/downloads/)
 - [Conan](https://docs.conan.io/en/latest/installation.html)
 
 Once you have these tools installed, run the following commands:
 ```
-conan remote add bintray-izmar https://api.bintray.com/conan/izmar/izmar-conan-dev-bintray
+conan remote add jfrog-izmar https://izmar.jfrog.io/artifactory/api/conan/dev
 git clone https://github.com/izzyreal/vmpc-workspace
 cd vmpc-workspace
 ```
