@@ -13,4 +13,3 @@ git pull
 git add linux
 
 git commit -m "Publish 0.4 Ubuntu x64"
-git push
