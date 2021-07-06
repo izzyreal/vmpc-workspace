@@ -29,6 +29,7 @@ def clean_folders():
     shutil.rmtree("mpc/build", ignore_errors=True)
     shutil.rmtree("ctoot/build", ignore_errors=True)
     shutil.rmtree("moduru/build", ignore_errors=True)
+    shutil.rmtree("akaifat/build", ignore_errors=True)
     shutil.rmtree("build", ignore_errors=True)
 
 if args.buildtool != 'vs' and args.buildtool != 'vs32' and args.buildtool != 'xcode' and args.buildtool != 'ninja-single'and args.buildtool != 'ninja-multi'and args.buildtool != 'ninja' and args.buildtool != 'make':
@@ -42,6 +43,10 @@ if not os.path.exists("build"):
     os.mkdir("build")
 
 if args.offline == False:
+    if os.path.exists("akaifat"):
+        run("cd akaifat && git pull && cd")
+    else:
+        run("git clone https://github.com/izzyreal/akaifat")
 	if os.path.exists("moduru"):
 		run("cd moduru && git pull && cd")
 	else:
