@@ -17,7 +17,7 @@ parser.add_argument('-c', '--clean', action='store_true', help='Clean all build 
 args = parser.parse_args()
 
 if args.offline == True:
-	sys.stderr.write('Entering offline mode...\n')
+    sys.stderr.write('Entering offline mode...\n')
 
 def run(cmd):
     ret = os.system(cmd)
@@ -47,38 +47,38 @@ if args.offline == False:
         run("cd akaifat && git pull && cd")
     else:
         run("git clone https://github.com/izzyreal/akaifat")
-	if os.path.exists("moduru"):
-		run("cd moduru && git pull && cd")
-	else:
-		run("git clone https://github.com/izzyreal/moduru")
+    if os.path.exists("moduru"):
+        run("cd moduru && git pull && cd")
+    else:
+        run("git clone https://github.com/izzyreal/moduru")
 
-	if os.path.exists("ctoot"):
-		run("cd ctoot && git pull && cd")
-	else:
-		run("git clone https://github.com/izzyreal/ctoot")
+    if os.path.exists("ctoot"):
+        run("cd ctoot && git pull && cd")
+    else:
+        run("git clone https://github.com/izzyreal/ctoot")
 
-	if os.path.exists("mpc"):
-		run("cd mpc && git pull && cd")
-	else:
-		run("git clone https://github.com/izzyreal/mpc")
+    if os.path.exists("mpc"):
+        run("cd mpc && git pull && cd")
+    else:
+        run("git clone https://github.com/izzyreal/mpc")
 
-	if os.path.exists("vmpc-juce"):
-		run("cd vmpc-juce && git pull && cd")
-	else:
-		run("git clone https://github.com/izzyreal/vmpc-juce")
+    if os.path.exists("vmpc-juce"):
+        run("cd vmpc-juce && git pull && cd")
+    else:
+        run("git clone https://github.com/izzyreal/vmpc-juce")
 
 os.chdir("build")
 if args.buildtool == 'vs32':
-	run("conan workspace install ../conanws.yml -s arch_build=x86 --build missing")
-	run("conan workspace install ../conanws.yml -s arch_build=x86 -s build_type=Debug --build missing")
+    run("conan workspace install ../conanws.yml -s arch_build=x86 --build missing")
+    run("conan workspace install ../conanws.yml -s arch_build=x86 -s build_type=Debug --build missing")
 elif args.buildtool == 'make' or args.buildtool == 'ninja-single':
     if not os.path.exists("Debug"): os.mkdir("Debug")
     if not os.path.exists("Release"): os.mkdir("Release")
     run("cd Release && conan workspace install ../../conanws.yml --build missing && cd ..")
     run("cd Debug && conan workspace install ../../conanws.yml --build missing -s build_type=Debug && cd ..")
 else:
-	run("conan workspace install ../conanws.yml --build missing")
-	run("conan workspace install ../conanws.yml --build missing -s build_type=Debug")
+    run("conan workspace install ../conanws.yml --build missing")
+    run("conan workspace install ../conanws.yml --build missing -s build_type=Debug")
 
 if args.buildtool == 'vs':
     run('cmake .. -G "Visual Studio 16 2019"')
