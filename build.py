@@ -10,7 +10,7 @@ class MyParser(argparse.ArgumentParser):
         sys.exit(2)
 
 parser = MyParser(description='Build the VMPC2000XL workspace.')
-parser.add_argument('buildtool', help='The build tool you want to build the workspace for.\nOptions are vs, vs32, xcode, make, ninja, ninja-multi (same as ninja) and ninja-single.')
+parser.add_argument('buildtool', help='The build tool you want to build the workspace for.\nOptions are vs, vs32, xcode, make, codeblocks, ninja, ninja-multi (same as ninja) and ninja-single.')
 parser.add_argument('-o', '--offline', action='store_true', help='Offline mode. No git clone or pull and no Conan package fetching.')
 parser.add_argument('-c', '--clean', action='store_true', help='Clean all build dirs before building.')
 
@@ -32,8 +32,15 @@ def clean_folders():
     shutil.rmtree("akaifat/build", ignore_errors=True)
     shutil.rmtree("build", ignore_errors=True)
 
-if args.buildtool != 'vs' and args.buildtool != 'vs32' and args.buildtool != 'xcode' and args.buildtool != 'ninja-single'and args.buildtool != 'ninja-multi'and args.buildtool != 'ninja' and args.buildtool != 'make':
-    print('Build tool has to be vs, vs32, xcode, make, ninja, ninja-multi or ninja-single')
+if args.buildtool != 'vs' and \
+args.buildtool != 'vs32' and \
+args.buildtool != 'xcode' and \
+args.buildtool != 'ninja-single' and \
+args.buildtool != 'ninja-multi' and \
+args.buildtool != 'ninja' and \
+args.buildtool != 'codeblocks' and \
+args.buildtool != 'make':
+    print('Build tool has to be vs, vs32, xcode, make, codeblocks, ninja, ninja-multi or ninja-single')
     quit()
 
 if args.clean == True:
@@ -88,6 +95,8 @@ elif args.buildtool == 'xcode':
     run('cmake .. -G "Xcode"')
 elif args.buildtool == 'ninja' or args.buildtool == 'ninja-multi':
     run('cmake .. -G "Ninja Multi-Config"')
+elif args.buildtool == 'codeblocks':
+    run('cmake .. -G "CodeBlocks - Ninja"')
 elif args.buildtool == 'ninja-single':
     run('cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Debug -B ./Debug')
     run('cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Release -B ./Release')
