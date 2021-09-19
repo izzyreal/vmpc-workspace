@@ -1,4 +1,5 @@
 cd \Users\izmar\git\vmpc-workspace
+git pull
 python build.py -c vs
 cd build
 cmake --build . --config Release --target vmpc2000xl_All
