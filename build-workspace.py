@@ -1,5 +1,12 @@
-# VMPC2000XL binary build script intended for building release
-# binaries for distribution and end-use.
+# VMPC2000XL IDE workspace build script intended for contributors
+# and others who are interested in poking around in VMPC2000XL's code.
+#
+# This script creates multi-config project files for your
+# IDE. Supported IDEs are Code::Blocks, Visual Studio and Xcode.
+#
+# Once you load the created project file from the root build/ dir
+# into your IDE, you can switch between Debug and Release configurations.
+
 
 import os
 import shutil
@@ -12,8 +19,8 @@ class MyParser(argparse.ArgumentParser):
         self.print_help()
         sys.exit(2)
 
-parser = MyParser(description='Build VMPC2000XL')
-parser.add_argument('buildtool', help='The build tool you want to build the binaries with.\nOptions are vs, vs32, xcode, make, codeblocks, ninja, ninja-multi (same as ninja) and ninja-single.')
+parser = MyParser(description='Build the VMPC2000XL workspace.')
+parser.add_argument('buildtool', help='The build tool you want to build the workspace for.\nOptions are vs, vs32, xcode, make, codeblocks, ninja, ninja-multi (same as ninja) and ninja-single.')
 parser.add_argument('-o', '--offline', action='store_true', help='Offline mode. No git clone or pull and no Conan package fetching.')
 parser.add_argument('-c', '--clean', action='store_true', help='Clean all build dirs before building.')
 
@@ -79,12 +86,16 @@ if args.offline == False:
 
 os.chdir("build")
 if args.buildtool == 'vs32':
-    run("conan workspace install ../conanws.yml -s arch_build=x86 -s build_type=Release --build missing")
+    run("conan workspace install ../conanws.yml -s arch_build=x86 --build missing")
+    run("conan workspace install ../conanws.yml -s arch_build=x86 -s build_type=Debug --build missing")
 elif args.buildtool == 'make' or args.buildtool == 'ninja-single':
+    if not os.path.exists("Debug"): os.mkdir("Debug")
     if not os.path.exists("Release"): os.mkdir("Release")
     run("cd Release && conan workspace install ../../conanws.yml --build missing && cd ..")
+    run("cd Debug && conan workspace install ../../conanws.yml --build missing -s build_type=Debug && cd ..")
 else:
-    run("conan workspace install ../conanws.yml --build missing -s build_type=Release")
+    run("conan workspace install ../conanws.yml --build missing")
+    run("conan workspace install ../conanws.yml --build missing -s build_type=Debug")
 
 if args.buildtool == 'vs':
     run('cmake .. -G "Visual Studio 16 2019"')
@@ -97,8 +108,20 @@ elif args.buildtool == 'ninja' or args.buildtool == 'ninja-multi':
 elif args.buildtool == 'codeblocks':
     run('cmake .. -G "CodeBlocks - Ninja"')
 elif args.buildtool == 'ninja-single':
+    run('cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Debug -B ./Debug')
     run('cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Release -B ./Release')
 elif args.buildtool == 'make':
+    run('cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -B ./Debug')
     run('cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -B ./Release')
 
-run('cmake --build . --config Release --target vmpc2000xl_All')
+# Uncomment the below to build a target
+# When using Unix Makefiles or Ninja single config
+#run('cmake --build ./Release --config Release --target vmpc2000xl_LV2')
+
+# When using any other generator
+#run('cmake --build . --config Release --target vmpc2000xl_Standalone')
+
+# Uncommend the below to run the executables
+#os.chdir("..")
+#run('cd moduru/build/Release && test')
+#run('cd moduru/build/Debug && test')
