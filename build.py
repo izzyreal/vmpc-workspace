@@ -97,8 +97,8 @@ elif args.buildtool == 'ninja' or args.buildtool == 'ninja-multi':
 elif args.buildtool == 'codeblocks':
     run('cmake .. -G "CodeBlocks - Ninja"')
 elif args.buildtool == 'ninja-single':
-    run('cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Release -B ./Release')
+    run('cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Release')
 elif args.buildtool == 'make':
-    run('cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -B ./Release')
+    run('cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release')
 
 run('cmake --build . --config Release --target vmpc2000xl_All')
