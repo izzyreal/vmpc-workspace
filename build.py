@@ -88,17 +88,22 @@ else:
 
 if args.buildtool == 'vs':
     run('cmake .. -G "Visual Studio 16 2019"')
+    run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'vs32':
     run('cmake .. -G "Visual Studio 16 2019" -A Win32')
+    run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'xcode':
     run('cmake .. -G "Xcode"')
+    run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'ninja' or args.buildtool == 'ninja-multi':
     run('cmake .. -G "Ninja Multi-Config"')
+    run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'codeblocks':
     run('cmake .. -G "CodeBlocks - Ninja"')
+    run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'ninja-single':
-    run('cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Release')
+    run('cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Release -B ./Release')
+    run('cmake --build ./Release --target vmpc2000xl_All')
 elif args.buildtool == 'make':
-    run('cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release')
-
-run('cmake --build . --config Release --target vmpc2000xl_All')
+    run('cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -B ./Release')
+    run('cmake --build ./Release --target vmpc2000xl_All')
