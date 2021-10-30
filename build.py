@@ -106,4 +106,4 @@ elif args.buildtool == 'ninja-single':
     run('cmake --build ./Release --target vmpc2000xl_All')
 elif args.buildtool == 'make':
     run('cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -B ./Release')
-    run('cmake --build ./Release --target vmpc2000xl_All')
+    run('cmake --build ./Release --target vmpc2000xl_All --verbose')
