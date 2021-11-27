@@ -42,14 +42,7 @@ def clean_folders():
     shutil.rmtree("akaifat/build", ignore_errors=True)
     shutil.rmtree("build", ignore_errors=True)
 
-if args.buildtool != 'vs' and \
-args.buildtool != 'vs32' and \
-args.buildtool != 'xcode' and \
-args.buildtool != 'ninja-single' and \
-args.buildtool != 'ninja-multi' and \
-args.buildtool != 'ninja' and \
-args.buildtool != 'codeblocks' and \
-args.buildtool != 'make':
+if args.buildtool not in ['vs', 'vs32', 'xcode', 'ninja-single', 'ninja-multi', 'ninja', 'codeblocks', 'make']:
     print('Build tool has to be vs, vs32, xcode, make, codeblocks, ninja, ninja-multi or ninja-single')
     quit()
 
