@@ -20,7 +20,7 @@ class MyParser(argparse.ArgumentParser):
         sys.exit(2)
 
 parser = MyParser(description='Build the VMPC2000XL workspace.')
-parser.add_argument('buildtool', help='The build tool you want to build the workspace for.\nOptions are vs, vs32, xcode, make, codeblocks, ninja, ninja-multi (same as ninja) and ninja-single.')
+parser.add_argument('buildtool', help='The build tool you want to build the workspace for.\nOptions are vs, vs32, xcode, xcode-ios, make, codeblocks, ninja, ninja-multi (same as ninja) and ninja-single.')
 parser.add_argument('-o', '--offline', action='store_true', help='Offline mode. No git clone or pull and no Conan package fetching.')
 parser.add_argument('-c', '--clean', action='store_true', help='Clean all build dirs before building.')
 
@@ -42,8 +42,8 @@ def clean_folders():
     shutil.rmtree("akaifat/build", ignore_errors=True)
     shutil.rmtree("build", ignore_errors=True)
 
-if args.buildtool not in ['vs', 'vs32', 'xcode', 'ninja-single', 'ninja-multi', 'ninja', 'codeblocks', 'make']:
-    print('Build tool has to be vs, vs32, xcode, make, codeblocks, ninja, ninja-multi or ninja-single')
+if args.buildtool not in ['vs', 'vs32', 'xcode','xcode-ios', 'ninja-single', 'ninja-multi', 'ninja', 'codeblocks', 'make']:
+    print('Build tool has to be vs, vs32, xcode, xcode-ios, make, codeblocks, ninja, ninja-multi or ninja-single')
     quit()
 
 if args.clean == True:
@@ -96,6 +96,8 @@ elif args.buildtool == 'vs32':
     run('cmake .. -G "Visual Studio 16 2019" -A Win32')
 elif args.buildtool == 'xcode':
     run('cmake .. -G "Xcode"')
+elif args.buildtool == 'xcode-ios':
+    run('cmake .. -G "Xcode" -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_DEPLOYMENT_TARGET=9.3 -DCMAKE_TOOLCHAIN_FILE=../ios.toolchain.cmake -DPLATFORM=OS64COMBINED -DENABLE_ARC=0')
 elif args.buildtool == 'ninja' or args.buildtool == 'ninja-multi':
     run('cmake .. -G "Ninja Multi-Config"')
 elif args.buildtool == 'codeblocks':
