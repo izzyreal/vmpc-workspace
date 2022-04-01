@@ -87,10 +87,10 @@ elif args.buildtool == 'vs32':
     run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'xcode-ios':
     run('cmake .. -G "Xcode" -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_DEPLOYMENT_TARGET=9.3 -DCMAKE_TOOLCHAIN_FILE=../ios.toolchain.cmake -DPLATFORM=OS64COMBINED -DENABLE_ARC=0')
-    run('cmake --build . --config Release --target vmpc2000xl_Standalone')
-    run('cmake --build . --config Release --target vmpc2000xl_AUv3')
+    # run('cmake --build . --config Release --target vmpc2000xl_Standalone')
+    # run('cmake --build . --config Release --target vmpc2000xl_AUv3')
     run('xcodebuild -project vmpc-workspace.xcodeproj -scheme vmpc2000xl_Standalone -sdk iphoneos -configuration Release archive -archivePath "./vmpc2000xl_Standalone.xcarchive"')
-    run('xcodebuild -project vmpc-workspace.xcodeproj -scheme vmpc2000xl_AUv3 -sdk iphoneos -configuration Release archive -archivePath "./vmpc2000xl_AUv3.xcarchive"')
+    # run('xcodebuild -project vmpc-workspace.xcodeproj -scheme vmpc2000xl_AUv3 -sdk iphoneos -configuration Release archive -archivePath "./vmpc2000xl_AUv3.xcarchive"')
     # run('xcodebuild -exportArchive -archivePath ./vmpc2000xl_Standalone.xcarchive -exportOptionsPlist ../ExportOptions.plist -exportPath "./" -allowProvisioningUpdates')
     # run('xcodebuild -exportArchive -archivePath ./vmpc2000xl_AUv3.xcarchive -exportOptionsPlist ../ExportOptions.plist -exportPath "./" -allowProvisioningUpdates')
 elif args.buildtool == 'ninja' or args.buildtool == 'ninja-multi':
