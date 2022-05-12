@@ -6,15 +6,19 @@ import shutil
 import argparse
 import sys
 
+
 class MyParser(argparse.ArgumentParser):
     def error(self, message):
         sys.stderr.write('error: %s\n' % message)
         self.print_help()
         sys.exit(2)
 
+
 parser = MyParser(description='Build VMPC2000XL')
-parser.add_argument('buildtool', help='The build tool you want to build the binaries with.\nOptions are vs, vs32, vs2022, xcode, xcode-ios, make, codeblocks, ninja, ninja-multi (same as ninja) and ninja-single.')
-parser.add_argument('-o', '--offline', action='store_true', help='Offline mode. No git clone or pull and no Conan package fetching.')
+parser.add_argument('buildtool',
+                    help='The build tool you want to build the binaries with.\nOptions are vs, vs32, vs2022, xcode, xcode-ios, make, codeblocks, ninja, ninja-multi (same as ninja) and ninja-single.')
+parser.add_argument('-o', '--offline', action='store_true',
+                    help='Offline mode. No git clone or pull and no Conan package fetching.')
 parser.add_argument('-c', '--clean', action='store_true', help='Clean all build dirs before building.')
 
 args = parser.parse_args()
@@ -22,10 +26,12 @@ args = parser.parse_args()
 if args.offline == True:
     sys.stderr.write('Entering offline mode...\n')
 
+
 def run(cmd):
     ret = os.system(cmd)
     if ret != 0:
         raise Exception("Command failed: %s" % cmd)
+
 
 def clean_folders():
     shutil.rmtree("vmpc-juce/build", ignore_errors=True)
@@ -35,8 +41,11 @@ def clean_folders():
     shutil.rmtree("akaifat/build", ignore_errors=True)
     shutil.rmtree("build", ignore_errors=True)
 
-if args.buildtool not in ['vs', 'vs32', 'vs2022', 'xcode', 'xcode-ios', 'ninja-single', 'ninja-multi', 'ninja', 'codeblocks', 'make']:
-    print('Build tool has to be vs, vs32, vs2022, xcode, xcode-ios, make, codeblocks, ninja, ninja-multi or ninja-single')
+
+if args.buildtool not in ['vs', 'vs32', 'vs2022', 'xcode', 'xcode-ios', 'ninja-single', 'ninja-multi', 'ninja',
+                          'codeblocks', 'make']:
+    print(
+        'Build tool has to be vs, vs32, vs2022, xcode, xcode-ios, make, codeblocks, ninja, ninja-multi or ninja-single')
     quit()
 
 if args.clean == True:
@@ -88,12 +97,15 @@ if args.buildtool == 'vs2022':
 elif args.buildtool == 'vs32':
     run('cmake .. -G "Visual Studio 16 2019" -A Win32')
     run('cmake --build . --config Release --target vmpc2000xl_All')
+elif args.buildtool == 'xcode':
+    run('cmake .. -G "Xcode"')
+    run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'xcode-ios':
     run('cmake .. -G "Xcode" -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_DEPLOYMENT_TARGET=9.3 -DCMAKE_TOOLCHAIN_FILE=../ios.toolchain.cmake -DPLATFORM=OS64COMBINED -DENABLE_ARC=0')
     run('cmake --build . --config Release --target vmpc2000xl')
     run('xcodebuild -project vmpc-workspace.xcodeproj -scheme vmpc2000xl_Standalone -allowProvisioningUpdates -sdk iphoneos -configuration Release archive -archivePath "./vmpc2000xl_StandaloneAndAUv3.xcarchive"')
     # run('xcodebuild -exportArchive -archivePath ./vmpc2000xl_StandaloneAndAUv3.xcarchive -exportOptionsPlist ../ExportOptions.plist -exportPath "./" -allowProvisioningUpdates')
-     args.buildtool == 'ninja' or args.buildtool == 'ninja-multi':
+elif args.buildtool == 'ninja' or args.buildtool == 'ninja-multi':
     run('cmake .. -G "Ninja Multi-Config"')
     run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'codeblocks':
