@@ -1,9 +1,9 @@
 editables:
     akaifat/0.1@izmar/dev:
         path: akaifat
-    moduru/0.1@izmar/dev:
+    moduru/0.2@izmar/dev:
         path: moduru
-    ctoot/0.1@izmar/dev:
+    ctoot/0.2@izmar/dev:
         path: ctoot
     mpc/0.1@izmar/dev:
         path: mpc
