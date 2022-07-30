@@ -98,7 +98,7 @@ elif args.buildtool == 'vs32':
     run('cmake .. -G "Visual Studio 16 2019" -A Win32')
     run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'xcode':
-    run('cmake .. -G "Xcode"')
+    run('cmake .. -G "Xcode" -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"')
     run('cmake --build . --config Release --target vmpc2000xl_All')
 elif args.buildtool == 'xcode-ios':
     run('cmake .. -G "Xcode" -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_DEPLOYMENT_TARGET=9.3 -DCMAKE_TOOLCHAIN_FILE=../ios.toolchain.cmake -DPLATFORM=OS64COMBINED -DENABLE_ARC=0')
