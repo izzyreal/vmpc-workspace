@@ -1,3 +1,13 @@
+# ARCHIVED - DO NOT USE
+VMPC2000XL has migrated away from Conan and now fully relies on CMake for including and maintaining dependencies.
+I'll add a README to [vmpc-juce](https://github.com/izzyreal/vmpc-juce), but building from source should be very simple now:
+```bash
+$ git clone https://github.com/izzyreal/vmpc-juce
+$ mkdir build && cd build
+$ cmake .. # Optionally with '-G "Xcode"' or similar if you want to edit VMPC2000XL in an IDE
+$ make vmpc2000xl_All -j 8
+```
+
 # Intended Audience
 
 You are interested in
